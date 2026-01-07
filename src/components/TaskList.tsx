@@ -5,22 +5,22 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
-import type { DragEndEvent } from '@dnd-kit/core';
+} from "@dnd-kit/core";
+import type {DragEndEvent} from "@dnd-kit/core";
 import {
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { Box, Typography } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { reorderTasks, toggleTask } from '../store/taskSlice';
-import TaskItem from './TaskItem';
-import type { Task } from '../types/task';
+} from "@dnd-kit/sortable";
+import {Box, Typography} from "@mui/material";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {reorderTasks} from "../store/taskSlice";
+import TaskItem from "./TaskItem";
+import type {Task} from "../types/task";
 
 const TaskList = () => {
   const dispatch = useAppDispatch();
-  const { tasks, filter } = useAppSelector((state) => state.tasks);
+  const {tasks, filter} = useAppSelector((state) => state.tasks);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -31,14 +31,13 @@ const TaskList = () => {
 
   const filteredTasks = tasks
     .filter((task: Task) => {
-      if (filter === 'completed') return task.completed;
-      if (filter === 'active') return !task.completed;
-      return true;
+      if (filter === "all") return true;
+      return task.status === filter;
     })
     .sort((a, b) => a.order - b.order);
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+    const {active, over} = event;
 
     if (over && active.id !== over.id) {
       dispatch(
@@ -52,13 +51,11 @@ const TaskList = () => {
 
   if (filteredTasks.length === 0) {
     return (
-      <Box sx={{ textAlign: 'center', py: 4 }}>
+      <Box sx={{textAlign: "center", py: 4}}>
         <Typography variant="h6" color="text.secondary">
-          {filter === 'all'
-            ? 'No tasks yet. Add one to get started!'
-            : filter === 'completed'
-            ? 'No completed tasks.'
-            : 'No active tasks.'}
+          {filter === "all"
+            ? "No tasks yet. Add one to get started!"
+            : `No ${filter === "in-progress" ? "in progress" : filter} tasks.`}
         </Typography>
       </Box>
     );
@@ -75,11 +72,7 @@ const TaskList = () => {
         strategy={verticalListSortingStrategy}
       >
         {filteredTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            task={task}
-            onToggle={(id) => dispatch(toggleTask(id))}
-          />
+          <TaskItem key={task.id} task={task} />
         ))}
       </SortableContext>
     </DndContext>
