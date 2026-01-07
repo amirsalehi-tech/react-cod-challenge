@@ -1,11 +1,11 @@
-import { ToggleButton, ToggleButtonGroup, Box, Typography } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { setFilter } from '../store/taskSlice';
-import type { FilterStatus } from '../types/task';
+import {ToggleButton, ToggleButtonGroup, Box, Typography} from "@mui/material";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import {setFilter} from "../store/taskSlice";
+import type {FilterStatus} from "../types/task";
 
 const StatusFilter = () => {
   const dispatch = useAppDispatch();
-  const { filter, tasks } = useAppSelector((state) => state.tasks);
+  const {filter, tasks} = useAppSelector((state) => state.tasks);
 
   const handleFilterChange = (
     _event: React.MouseEvent<HTMLElement>,
@@ -16,12 +16,14 @@ const StatusFilter = () => {
     }
   };
 
-  const todoCount = tasks.filter((t) => t.status === 'todo').length;
-  const inProgressCount = tasks.filter((t) => t.status === 'in-progress').length;
-  const doneCount = tasks.filter((t) => t.status === 'done').length;
+  const todoCount = tasks.filter((t) => t.status === "todo").length;
+  const inProgressCount = tasks.filter(
+    (t) => t.status === "in-progress"
+  ).length;
+  const doneCount = tasks.filter((t) => t.status === "done").length;
 
   return (
-    <Box sx={{ mb: 3 }}>
+    <Box sx={{mb: 3}}>
       <Typography variant="h6" gutterBottom>
         Filter by Status
       </Typography>
