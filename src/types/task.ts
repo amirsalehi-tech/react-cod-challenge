@@ -1,4 +1,4 @@
-export type TaskStatus = 'todo' | 'in-progress' | 'done';
+export type TaskStatus = "todo" | "in-progress" | "done";
 
 export interface Task {
   id: string;
@@ -9,4 +9,4 @@ export interface Task {
   completed: boolean;
 }
 
-export type FilterStatus = 'all' | 'todo' | 'in-progress' | 'done';
+export type FilterStatus = "all" | "todo" | "in-progress" | "done";

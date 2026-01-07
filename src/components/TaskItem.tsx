@@ -1,11 +1,6 @@
 import {useSortable} from "@dnd-kit/sortable";
 import {CSS} from "@dnd-kit/utilities";
-import {
-  Paper,
-  Typography,
-  Box,
-  IconButton,
-} from "@mui/material";
+import {Paper, Typography, Box, IconButton} from "@mui/material";
 import {DragIndicator, Delete} from "@mui/icons-material";
 import {useAppDispatch} from "../store/hooks";
 import {deleteTask} from "../store/taskSlice";
@@ -17,14 +12,8 @@ interface TaskItemProps {
 
 const TaskItem = ({task}: TaskItemProps) => {
   const dispatch = useAppDispatch();
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({id: task.id});
+  const {attributes, listeners, setNodeRef, transform, transition, isDragging} =
+    useSortable({id: task.id});
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -49,8 +38,8 @@ const TaskItem = ({task}: TaskItemProps) => {
       sx={{
         p: 2,
         mb: 2,
-        display: 'flex',
-        alignItems: 'flex-start',
+        display: "flex",
+        alignItems: "flex-start",
         gap: 2,
         backgroundColor: isDone ? "action.selected" : "background.paper",
         textDecoration: isDone ? "line-through" : "none",
@@ -74,7 +63,7 @@ const TaskItem = ({task}: TaskItemProps) => {
       >
         <DragIndicator />
       </Box>
-      <Box sx={{ flex: 1 }}>
+      <Box sx={{flex: 1}}>
         <Typography
           variant="h6"
           component="h3"
