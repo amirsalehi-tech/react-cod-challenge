@@ -4,8 +4,8 @@ import {ThemeProvider, createTheme} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import {store} from "./store/store";
 import AddTaskForm from "./components/AddTaskForm";
-import TaskFilter from "./components/TaskFilter";
-import TaskList from "./components/TaskList";
+import StatusFilter from "./components/StatusFilter";
+import KanbanBoard from "./components/KanbanBoard";
 
 const theme = createTheme({
   palette: {
@@ -24,18 +24,18 @@ const App = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Container maxWidth="md" sx={{py: 4}}>
+        <Container maxWidth="xl" sx={{py: 4}}>
           <Box sx={{mb: 4, textAlign: "center"}}>
             <Typography variant="h3" component="h1" gutterBottom>
               Task Manager
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              Organize your tasks efficiently
+              Drag and drop tasks between columns to organize your work
             </Typography>
           </Box>
           <AddTaskForm />
-          <TaskFilter />
-          <TaskList />
+          <StatusFilter />
+          <KanbanBoard />
         </Container>
       </ThemeProvider>
     </Provider>
