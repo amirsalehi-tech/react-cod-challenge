@@ -122,7 +122,6 @@ const KanbanBoard = () => {
     {status: "done", title: "Done", color: "#e8f5e9"},
   ];
 
-  // Filter columns based on selected filter
   const filteredColumns =
     filter === "all"
       ? statusColumns
@@ -147,12 +146,10 @@ const KanbanBoard = () => {
     const activeTask = tasks.find((t) => t.id === active.id);
     if (!activeTask) return;
 
-    // Check if dropping on a status column
     const overStatus = statusColumns.find(
       (col) => col.status === over.id
     )?.status;
     if (overStatus) {
-      // Dropped on a column
       const tasksInStatus = getTasksByStatus(overStatus);
       dispatch(
         moveTask({
@@ -164,11 +161,9 @@ const KanbanBoard = () => {
       return;
     }
 
-    // Check if dropping on another task
     const overTask = tasks.find((t) => t.id === over.id);
     if (overTask) {
       if (activeTask.status === overTask.status) {
-        // Same column - reorder
         dispatch(
           reorderTasks({
             activeId: active.id as string,
@@ -176,7 +171,6 @@ const KanbanBoard = () => {
           })
         );
       } else {
-        // Different column - move to new column
         const tasksInNewStatus = getTasksByStatus(overTask.status);
         const overIndex = tasksInNewStatus.findIndex((t) => t.id === over.id);
         dispatch(

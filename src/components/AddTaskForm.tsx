@@ -1,30 +1,24 @@
-import { useState } from 'react';
-import {
-  Box,
-  TextField,
-  Button,
-  Paper,
-  Typography,
-} from '@mui/material';
-import { useAppDispatch } from '../store/hooks';
-import { addTask } from '../store/taskSlice';
+import {useState} from "react";
+import {Box, TextField, Button, Paper, Typography} from "@mui/material";
+import {useAppDispatch} from "../store/hooks";
+import {addTask} from "../store/taskSlice";
 
 const AddTaskForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
-      dispatch(addTask({ title: title.trim(), description: description.trim() }));
-      setTitle('');
-      setDescription('');
+      dispatch(addTask({title: title.trim(), description: description.trim()}));
+      setTitle("");
+      setDescription("");
     }
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+    <Paper elevation={3} sx={{p: 3, mb: 3}}>
       <Typography variant="h5" component="h2" gutterBottom>
         Add New Task
       </Typography>
@@ -52,7 +46,7 @@ const AddTaskForm = () => {
           type="submit"
           variant="contained"
           color="primary"
-          sx={{ mt: 2 }}
+          sx={{mt: 2}}
           disabled={!title.trim()}
         >
           Add Task

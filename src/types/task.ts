@@ -6,7 +6,7 @@ export interface Task {
   description: string;
   status: TaskStatus;
   order: number;
-  completed: boolean; // Kept for backward compatibility
+  completed: boolean;
 }
 
 export type FilterStatus = 'all' | 'todo' | 'in-progress' | 'done';

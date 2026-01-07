@@ -1,21 +1,21 @@
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import {useSortable} from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities";
 import {
   Paper,
   Typography,
   Box,
   IconButton,
-} from '@mui/material';
-import { DragIndicator, Delete } from '@mui/icons-material';
-import { useAppDispatch } from '../store/hooks';
-import { deleteTask } from '../store/taskSlice';
-import type { Task } from '../types/task';
+} from "@mui/material";
+import {DragIndicator, Delete} from "@mui/icons-material";
+import {useAppDispatch} from "../store/hooks";
+import {deleteTask} from "../store/taskSlice";
+import type {Task} from "../types/task";
 
 interface TaskItemProps {
   task: Task;
 }
 
-const TaskItem = ({ task }: TaskItemProps) => {
+const TaskItem = ({task}: TaskItemProps) => {
   const dispatch = useAppDispatch();
   const {
     attributes,
@@ -24,7 +24,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: task.id });
+  } = useSortable({id: task.id});
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -32,7 +32,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
     opacity: isDragging ? 0.5 : 1,
   };
 
-  const isDone = task.status === 'done';
+  const isDone = task.status === "done";
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -52,24 +52,24 @@ const TaskItem = ({ task }: TaskItemProps) => {
         display: 'flex',
         alignItems: 'flex-start',
         gap: 2,
-        backgroundColor: isDone ? 'action.selected' : 'background.paper',
-        textDecoration: isDone ? 'line-through' : 'none',
-        cursor: 'grab',
-        userSelect: 'none',
-        '&:hover': {
+        backgroundColor: isDone ? "action.selected" : "background.paper",
+        textDecoration: isDone ? "line-through" : "none",
+        cursor: "grab",
+        userSelect: "none",
+        "&:hover": {
           elevation: 4,
-          transform: 'translateY(-2px)',
+          transform: "translateY(-2px)",
         },
-        '&:active': {
-          cursor: 'grabbing',
+        "&:active": {
+          cursor: "grabbing",
         },
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          color: 'text.secondary',
+          display: "flex",
+          alignItems: "center",
+          color: "text.secondary",
         }}
       >
         <DragIndicator />
@@ -79,10 +79,10 @@ const TaskItem = ({ task }: TaskItemProps) => {
           variant="h6"
           component="h3"
           sx={{
-            textDecoration: isDone ? 'line-through' : 'none',
-            color: isDone ? 'text.secondary' : 'text.primary',
-            fontWeight: task.status === 'in-progress' ? 'bold' : 'normal',
-            pointerEvents: 'none',
+            textDecoration: isDone ? "line-through" : "none",
+            color: isDone ? "text.secondary" : "text.primary",
+            fontWeight: task.status === "in-progress" ? "bold" : "normal",
+            pointerEvents: "none",
           }}
         >
           {task.title}
@@ -93,8 +93,8 @@ const TaskItem = ({ task }: TaskItemProps) => {
             color="text.secondary"
             sx={{
               mt: 1,
-              textDecoration: isDone ? 'line-through' : 'none',
-              pointerEvents: 'none',
+              textDecoration: isDone ? "line-through" : "none",
+              pointerEvents: "none",
             }}
           >
             {task.description}
@@ -107,9 +107,9 @@ const TaskItem = ({ task }: TaskItemProps) => {
         color="error"
         sx={{
           opacity: 0.7,
-          '&:hover': {
+          "&:hover": {
             opacity: 1,
-            backgroundColor: 'error.light',
+            backgroundColor: "error.light",
           },
         }}
         aria-label="delete task"
